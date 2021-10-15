@@ -1,4 +1,6 @@
 #include "iostream"
+#include<cstdlib>
+#include<ctime>
 using namespace std;
 
 void imprimir(int (*A)[3]){
@@ -8,6 +10,12 @@ void imprimir(int (*A)[3]){
         for(int j=0;j<3;j++,a++){
             cout<<*a<<",";
         }cout<<"\n";
+    }
+}
+void numrand(int (*arr)[3],int sizeI){
+    int *pt = *arr;
+    for(int i = 0;i<sizeI*3;i++){
+        *pt = 1+rand()%15;pt++;
     }
 }
 void Multi(int (*A)[3],int (*B)[3], int (*C)[3]){
@@ -26,15 +34,12 @@ void Multi(int (*A)[3],int (*B)[3], int (*C)[3]){
 }
 
 int main(){
-    int a[3][3]={
-        {1,2,3},{4,5,6},{7,8,9}
-    };
-    int b[3][3] = {
-        {2,2,2},{3,3,3},{8,8,8}
-    };
-    int c[3][3] = {
-        {0,0,0},{0,0,0},{0,0,0}
-    };
+    int a[3][3];
+    int b[3][3];
+    int c[3][3]= {{0,0,0},{0,0,0},{0,0,0}};
+    srand(time(NULL));
+    numrand(a,3);
+    numrand(b,3);
     imprimir(a);
     imprimir(b);
     Multi(a,b,c);
