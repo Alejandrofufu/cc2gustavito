@@ -56,23 +56,38 @@ void  mezcla2(int *a,int *b){
         }
     }
 }
-int main(){
-    //int a[5]={5,6,8,9,22};
-    //int b[5] = {1,2,3,4,5};
-    //int c[10] ={0,0,0,0,0,0,0,0,0,0};
-    //int d[10] ={9,11,13,15,17,4,12,18,20,24};    
-    int d[10] ={1,3,5,7,9,2,4,6,8,10};
+void  mezcla3(int *a,int *b){
+    int *fin = a+(b-a)*2;
+    while(a<b && b<fin){
+        if(*a<*b){a++;}
+        else{
+            swap(a,b);
+            a++;
+            for(int *r = a;r<b;r++)
+                swap(r,b);
+            b++;
+            
+        }
+    }
 
-    /*
+}
+int main(){
+    int a[5]={3,7,9,11,15};
+    int b[5] = {2,4,6,8,10};
+    int c[10] ={0,0,0,0,0,0,0,0,0,0};
+    //int d[10] ={9,11,13,15,17,4,12,18,20,24};    
+    //int d[10] ={3,7,9,11,15,2,4,6,8,10};
+
+    
     imprimir(a,5);
     imprimir(b,5);
     mezcla(a,b,c,10);
-    imprimir(c,10);*/
+    imprimir(c,10);/*
     int *a = &d[0];
     int *b = &d[5];
     imprimir(d,10);
     cout<<"\nlista ordenada: \n";
-    mezcla2(a,b);
-    imprimir(d,10);
+    mezcla3(a,b);
+    imprimir(d,10);*/
     return 0;
 }
