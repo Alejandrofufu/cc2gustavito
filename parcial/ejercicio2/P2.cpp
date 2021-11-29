@@ -10,8 +10,8 @@ char cipher(char Ent,int Key)
 void procesa(char (*MatCad)[200], int MatTam, char (*Oper)(char,int),int key)
 {
 	for(char (*p)[200]=MatCad; p < MatCad+MatTam; p++){
-		for(char *o=*p;o<*p+200;o++){
-			*o=*o*key;
+		for(char *o=*p;o;o++){
+			Oper(*o,key);
 		}
 	}
 }
