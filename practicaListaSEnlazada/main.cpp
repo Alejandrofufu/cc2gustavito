@@ -49,12 +49,12 @@ void mezcla(nodo *&a, nodo *&b)
         if(A->valor < B->valor){
             tmp->next = A;
             A = A->next;
-            if(tmp->valor != a->valor || tmp ->next == a )tmp = tmp->next;
+            tmp = tmp->next;
         }
         else{
             tmp->next = B;
             B = B->next;
-            if(tmp->valor != b->valor || tmp ->next == b )tmp = tmp->next;
+            tmp = tmp->next;
         }
     }
     if(!A){
@@ -74,7 +74,7 @@ void mezcla(nodo *&a, nodo *&b)
 int main() {
 
    int Arr1[10] = {5,8,25,30,35,41,48,53,67,76};
-   int Arr2[5] = {3,23,38,57,99};
+   int Arr2[5] = {3,4,38,57,99};
    nodo *A, *B;
    ArrToLe(Arr1,10,A);
    ArrToLe(Arr2,5,B);
