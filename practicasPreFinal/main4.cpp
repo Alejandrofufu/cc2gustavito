@@ -1,58 +1,61 @@
 #include <iostream>
 
 using namespace std;
-
+template<class T>
 struct asc
 {
-  bool operator()(int a, int b)
-  {return a<b;}
+  bool operator()(T a, T b)
+  {return a<=b;}
 };
-
+template<class T>
 struct desc
 {
-  bool operator()(int a, int b)
-  {return a>b;}
+  bool operator()(T a, T b)
+  {return a>=b;}
 };
 
-
+template<class T>
 class nodo
 {
   public:
-  int valor;
-  nodo* next;
-  nodo(int v, nodo* n=nullptr)
+  T valor;
+  nodo<T>* next;
+  nodo(T v, nodo<T>* n=nullptr)
   { 
     valor = v;
     next = n;
   }
 };
 
+template<class T,class O>
 class LE
 {
-  nodo* head=nullptr;
-
+  nodo<T>* head=nullptr;
+  O comp;
   public:
   void print();
-  bool find(int v,nodo *&pos);
-  void add(int v);
-  void del(int v);
+  bool find(T v,nodo<T> *&pos);
+  void add(T v);
+  void del(T v);
   ~LE();
 };
 
-void LE::print()
+template<class T,class O>
+void LE<T,O>::print()
 {
   cout<<"Head->";
-  for(nodo* p=head;p;p = p->next)
+  for(nodo<T>* p=head;p;p = p->next)
       cout<<p->valor<<"->";
   cout<<"NULL"<<endl;   
 }
 
-bool LE::find(int v, nodo *&pos)
+template<class T,class O>
+bool LE<T,O>::find(T v, nodo<T> *&pos)
 {
   bool encontrado =false;
   pos = nullptr;
 
-  for(nodo* p =head;p && p->valor<=v;p=p->next)
+  for(nodo<T>* p =head;p && comp(p->valor,v);p=p->next)
   {
     if(p->valor == v)
       {
@@ -64,21 +67,23 @@ bool LE::find(int v, nodo *&pos)
   return encontrado;
 }
 
-void LE::add(int v)
+template<class T,class O>
+void LE<T,O>::add(T v)
 {
-  nodo* pos_ant;
+  nodo<T>* pos_ant;
   if(!find(v,pos_ant))
   {
      if(pos_ant)
-       pos_ant->next = new nodo(v,pos_ant->next);
+       pos_ant->next = new nodo<T>(v,pos_ant->next);
      else
-      head = new nodo(v,head);
+      head = new nodo<T>(v,head);
   }
 }
 
-void LE::del(int v)
+template<class T,class O>
+void LE<T,O>::del(T v)
 {
-  nodo *pos_ant,*pos_del;
+  nodo<T> *pos_ant,*pos_del;
   if(find(v,pos_ant))
   {
     if(pos_ant)
@@ -96,7 +101,8 @@ void LE::del(int v)
   }
 }
 
-LE::~LE()
+template<class T,class O>
+LE<T,O>::~LE()
 {
   /*cout<<"Destruyendo lista..."<<endl;
   while(head)
@@ -110,9 +116,9 @@ LE::~LE()
 }
 
 int main() {
-  LE lista;
+  //LE lista;
   //LE<int,asc<int>> lista;
-  //LE<int,desc<int>> lista;
+  LE<int,desc<int>> lista;
   
   lista.print();
   lista.add(5);
@@ -140,10 +146,10 @@ int main() {
   cout<<"------------------------"<<endl;
 
   //LE<char,asc<char>> listaChar;
-  //LE<char,desc<char>> listaChar;
+  LE<char,desc<char>> listaChar;
 
   
-  /*
+  
   listaChar.print();
   listaChar.add('g');
   listaChar.print();
@@ -166,6 +172,6 @@ int main() {
   listaChar.print();
   listaChar.del('g');
   listaChar.print();
-  */
+  
 }
 

@@ -42,11 +42,44 @@ void print(nodo *lista)
 template<typename T>
 void ordenar(nodo*& lista, T comp)
 {
-  //por hacer
+  nodo* I = lista,*ox=lista;// iterador
+  nodo*tmp = lista,*j=lista;// lista sin ordenar y mayor menor
+  for(I= lista;I;I=I->next){
+    if(!comp(j->valor,I->valor))
+      j=I;
+  }
+  if(lista==j){
+    tmp = tmp->next;
+  }
+  else{
+    for( I = lista;I->next != j;I=I->next){}
+    I->next=I->next->next;
+    lista = j;
+  }
+  ox =lista;
+  while(tmp){
+    j = tmp;
+    for(I = tmp;I;I=I->next){
+      if(!comp(j->valor,I->valor))
+        j=I;
+    }
+    if(j==tmp){
+      tmp = tmp->next;
+      ox->next = j;
+      ox = ox->next;
+    }
+    else{
+      for( I = tmp;I->next != j;I=I->next){} 
+      I->next=I->next->next;
+      ox ->next= j;ox = ox->next;
+    }
+  }
+
+  
 }
 
 int main() {
-  int A[] = {7,7,27,7,12,9,18,9,8,7,-1};
+  int A[] = { 7, 7, 27, 7, 12, 9, 18, 9, 8, 7, -1 };
   nodo *miLista;
 
   crear(A,miLista);

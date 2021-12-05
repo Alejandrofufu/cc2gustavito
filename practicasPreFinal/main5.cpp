@@ -15,16 +15,25 @@ class Pendiente
   ParXY Origen;
 
   public:
-  //POR HACER
+  Pendiente(ParXY a):Origen(a) {};
+  void operator()(ParXY final){
+    cout<<(final.y-Origen.y)/(final.x-Origen.x)<<endl;
+  }
 };
 
 template<class O,class T, int a, int b>
 class Calcular
 {
   O op = O(T(a,b));
-
+  
   public:
- //POR HACER
+  Calcular(){};
+  void operator()(T *f,T *f2){
+    while(f<=f2){
+      op(*f);
+      f++;
+    }
+  }
 
 };
 

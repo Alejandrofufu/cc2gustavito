@@ -36,13 +36,42 @@ void PrintLe(nodo *head)
 
 void mezcla(nodo *&a, nodo *&b)
 {
-   //TO DO
+   nodo*tmp;
+   nodo*p=a;
+   nodo*q=b;
+   if(p->valor<q->valor){
+      tmp = p;p=p->next;
+   }
+   else{
+      tmp = q;q = q->next;
+   }
+   while(p&&q){
+      if(p->valor<q->valor){
+         tmp->next = p;
+         p=p->next;
+      }
+      else{
+         tmp->next = q;
+         q=q->next;
+      }
+      tmp=tmp->next;
+   }
+   if(!p){
+      tmp->next = q;
+      if(b->valor<a->valor)a = b;
+      b = p;
+   }
+   else{
+      tmp->next = p;
+      if(b->valor<a->valor)a=b;
+      b=q;
+   }
 }
 
 int main() {
 
-   int Arr1[10] = {5,8,25,30,35,41,48,53,67,76};
-   int Arr2[5] = {3,23,38,57,99};
+   int Arr1[10] = {3,8,25,30,35,41,48,53,67,76};
+   int Arr2[5] = {5,23,38,57,99};
    nodo *A, *B;
    ArrToLe(Arr1,10,A);
    ArrToLe(Arr2,5,B);
